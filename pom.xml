@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>io.pyramidion</groupId>
+  <artifactId>pyramidion4j</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <description>A capstone for your test pyramid</description>
+  <url>https://github.com/pyramidion-io/pyramidion4j</url>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Nathaniel Ritmeyer</name>
+      <id>natritmeyer</id>
+      <url>https://natritmeyer.com</url>
+      <roles>
+        <role>Owner</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <scm>
+    <url>https://github.com/pyramidion-io/pyramidion4j</url>
+    <connection>scm:git:git://github.com/pyramidion-io/pyramidion4j.git</connection>
+  </scm>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/pyramidion-io/pyramidion4j/issues</url>
+  </issueManagement>
+
+  <properties>
+    <!-- pyramidion arguments to pass to maven commands: -->
+
+    <!-- project -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <!-- toolchain -->
+    <maven.version>3.6.0</maven.version>
+    <java.version>11</java.version>
+
+    <!-- test execution -->
+    <junit5.version>5.6.2</junit5.version>
+    <cucumber.version>5.6.0</cucumber.version>
+    <assertj.version>3.15.0</assertj.version>
+
+    <!-- dependency injection -->
+    <spring.version>5.2.5.RELEASE</spring.version>
+    <snakeyaml.version>1.26</snakeyaml.version>
+
+    <!-- logging -->
+    <logback.version>1.2.3</logback.version>
+    <slf4j.version>1.7.30</slf4j.version>
+
+    <!-- plugins -->
+    <maven.enforcer.plugin.version>3.0.0-M3</maven.enforcer.plugin.version>
+    <maven.checkstyle.plugin.version>3.1.1</maven.checkstyle.plugin.version>
+    <checkstyle.version>8.31</checkstyle.version>
+    <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+    <build.helper.maven.plugin.version>3.1.0</build.helper.maven.plugin.version>
+    <maven.dependency.analyser.plugin.version>1.11.1</maven.dependency.analyser.plugin.version>
+    <maven.surefire.version>3.0.0-M4</maven.surefire.version>
+    <maven.site.version>3.9.0</maven.site.version>
+
+    <!-- reporting -->
+    <maven.project.info.reports.plugin.version>3.0.0</maven.project.info.reports.plugin.version>
+    <versions.maven.plugin.version>2.7</versions.maven.plugin.version>
+    <maven.dependency.plugin.version>3.1.1</maven.dependency.plugin.version>
+    <maven.javadoc.plugin.version>3.2.0</maven.javadoc.plugin.version>
+  </properties>
+
+  <dependencies>
+    <!--     test execution-->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit5.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
+      <version>${junit5.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-junit</artifactId>
+      <version>${cucumber.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-junit-platform-engine</artifactId>
+      <version>${cucumber.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-java8</artifactId>
+      <version>${cucumber.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>${assertj.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- dependency injection -->
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-spring</artifactId>
+      <version>${cucumber.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context-support</artifactId>
+      <version>${spring.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>${spring.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.yaml</groupId>
+      <artifactId>snakeyaml</artifactId>
+      <version>${snakeyaml.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- logging -->
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- enforce toolchain versions -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>${maven.enforcer.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>enforce</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>${maven.version}</version>
+                </requireMavenVersion>
+                <requireJavaVersion>
+                  <version>${java.version}</version>
+                </requireJavaVersion>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven.compiler.plugin.version}</version>
+        <configuration>
+          <release>${java.version}</release>
+        </configuration>
+      </plugin>
+
+      <!-- set up src/pyramidion4j/(java|resources) directory structure -->
+      <!-- must come before checkstyle as they're both run in the same phase but checkstyle needs to know about the diretories this plugin sets up -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>${build.helper.maven.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>add-pyramidion-tests</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>add-test-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.basedir}/src/pyramidion4j/java</source>
+              </sources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>add-pyramidion-test-resources</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>add-test-resource</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${project.basedir}/src/pyramidion4j/resources</directory>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- code style -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${maven.checkstyle.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>validate</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>check</goal>
+              <goal>checkstyle</goal>
+            </goals>
+            <configuration>
+              <configLocation>google_checks.xml</configLocation>
+              <suppressionsLocation>src/pyramidion4j/resources/checkstyle-suppressions.xml</suppressionsLocation>
+              <includeTestSourceDirectory>true</includeTestSourceDirectory>
+              <includeTestResources>true</includeTestResources>
+              <encoding>UTF-8</encoding>
+              <consoleOutput>true</consoleOutput>
+              <failsOnError>true</failsOnError>
+              <failOnViolation>true</failOnViolation>
+              <violationSeverity>warning</violationSeverity>
+            </configuration>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>${checkstyle.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+
+      <!-- check for unused and/or undeclared dependencies -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>${maven.dependency.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>dependency-info</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>tree</goal>
+              <goal>analyze-only</goal>
+            </goals>
+          </execution>
+        </executions>
+        <!-- the following is required until this is dealt with: https://issues.apache.org/jira/browse/MDEP-613 -->
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.shared</groupId>
+            <artifactId>maven-dependency-analyzer</artifactId>
+            <version>${maven.dependency.analyser.plugin.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+
+      <!-- autogenerated documentation -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>${maven.site.version}</version>
+        <configuration>
+          <locales>en</locales>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>${maven.project.info.reports.plugin.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>${maven.dependency.plugin.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <version>${versions.maven.plugin.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${maven.checkstyle.plugin.version}</version>
+        <configuration>
+          <configLocation>google_checks.xml</configLocation>
+          <includeTestSourceDirectory>true</includeTestSourceDirectory>
+          <includeTestResources>true</includeTestResources>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${maven.javadoc.plugin.version}</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>test-javadoc</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+    </plugins>
+  </reporting>
+
+  <profiles>
+    <profile>
+      <id>pyramidion4j-webdesktop</id>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>${maven.surefire.version}</version>
+            <configuration>
+              <trimStackTrace>false</trimStackTrace>
+              <runOrder>random</runOrder>
+              <includes>
+                <include>io.pyramidion.pyramidion4j.executors.WebDesktopTests</include>
+              </includes>
+              <systemPropertyVariables>
+                <cucumber.glue>io.pyramidion.pyramidion4j.glue.webdesktop, io.pyramidion.pyramidion4j.glue.common</cucumber.glue>
+              </systemPropertyVariables>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>integration-test</goal>
+                  <goal>verify</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+</project>
