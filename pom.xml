@@ -71,7 +71,7 @@
     <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
     <build.helper.maven.plugin.version>3.1.0</build.helper.maven.plugin.version>
     <maven.dependency.analyser.plugin.version>1.11.1</maven.dependency.analyser.plugin.version>
-    <maven.surefire.version>3.0.0-M4</maven.surefire.version>
+    <maven.surefire.version>2.22.2</maven.surefire.version>
     <maven.site.version>3.9.0</maven.site.version>
 
     <!-- reporting -->
@@ -93,12 +93,6 @@
       <groupId>org.junit.vintage</groupId>
       <artifactId>junit-vintage-engine</artifactId>
       <version>${junit5.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.cucumber</groupId>
-      <artifactId>cucumber-junit</artifactId>
-      <version>${cucumber.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -365,7 +359,7 @@
               <trimStackTrace>false</trimStackTrace>
               <runOrder>random</runOrder>
               <includes>
-                <include>io.pyramidion.pyramidion4j.executors.WebDesktopTests</include>
+                <include>io.pyramidion.pyramidion4j.features.RunCucumberTests</include>
               </includes>
               <systemPropertyVariables>
                 <cucumber.glue>io.pyramidion.pyramidion4j.glue.webdesktop, io.pyramidion.pyramidion4j.glue.common</cucumber.glue>
