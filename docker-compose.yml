@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  backend:
-    image: springcommunity/spring-petclinic-rest
+  springboot-petclinic:
+    image: arey/springboot-petclinic
     ports:
-      - "9966:9966"
+      - "8080:8080"
