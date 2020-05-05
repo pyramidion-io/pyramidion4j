@@ -52,12 +52,12 @@
 
     <!-- test execution -->
     <junit5.version>5.6.2</junit5.version>
-    <cucumber.version>5.6.0</cucumber.version>
+    <cucumber.version>5.7.0</cucumber.version>
     <restassured.version>4.3.0</restassured.version>
     <assertj.version>3.15.0</assertj.version>
 
     <!-- dependency injection -->
-    <spring.version>5.2.5.RELEASE</spring.version>
+    <spring.version>5.2.6.RELEASE</spring.version>
     <snakeyaml.version>1.26</snakeyaml.version>
 
     <!-- logging -->
@@ -362,7 +362,7 @@
                 <include>io.pyramidion.pyramidion4j.features.RunCucumberTests</include>
               </includes>
               <systemPropertyVariables>
-                <cucumber.glue>io.pyramidion.pyramidion4j.glue.webdesktop, io.pyramidion.pyramidion4j.glue.common</cucumber.glue>
+                <cucumber.glue>io.pyramidion.pyramidion4j.glue.webdesktop, io.pyramidion.pyramidion4j.glue.common, io.pyramidion.pyramidion4j.glue.config</cucumber.glue>
               </systemPropertyVariables>
             </configuration>
             <executions>
