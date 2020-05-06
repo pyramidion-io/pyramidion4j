@@ -377,6 +377,38 @@
         </plugins>
       </build>
     </profile>
+
+    <profile>
+      <id>pyramidion4j-rest</id>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>${maven.surefire.version}</version>
+            <configuration>
+              <trimStackTrace>false</trimStackTrace>
+              <runOrder>random</runOrder>
+              <includes>
+                <include>io.pyramidion.pyramidion4j.features.RunCucumberTests</include>
+              </includes>
+              <systemPropertyVariables>
+                <cucumber.glue>io.pyramidion.pyramidion4j.glue.rest, io.pyramidion.pyramidion4j.glue.common, io.pyramidion.pyramidion4j.glue.config</cucumber.glue>
+              </systemPropertyVariables>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>integration-test</goal>
+                  <goal>verify</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
 
 </project>
